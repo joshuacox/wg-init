@@ -1,0 +1,13 @@
+#!/bin/sh
+THIS_NAME=wg-init
+THIS_URL="https://github.com/joshuacox/$THIS_NAME.git"
+TMP_DIR=$(mktemp -d --suffix=".$THIS_NAME")
+function finish {
+  rm -Rf $TMP_DIR
+}
+trap finish EXIT
+
+cd $TMP_DIR
+git clone --depth=1 $THIS_URL
+cd $THIS_NAME
+sudo make install
