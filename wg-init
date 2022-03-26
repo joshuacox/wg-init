@@ -86,7 +86,7 @@ main () {
       echo "You can now use wg-quick"
       echo 'i.e.'
       echo 'sudo wg-quick up wg0'
-      echo "After you add your pub to your peer. Your pub is $(cat $HOME/.wg/keys/$HOSTNAME.pub)"
+      echo "After you add your pub to your peer. Your pub is:"
       echo " "
       echo "$(cat $HOME/.wg/keys/$HOSTNAME.pub)"
       echo " "
