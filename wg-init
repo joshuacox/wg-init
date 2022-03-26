@@ -65,7 +65,7 @@ EOF
 }
 
 main () {
-  set -ux
+  set -u
   prep_dirs
   make_keys
 
