@@ -1,5 +1,5 @@
 #!/bin/sh
-helper_line="MyAddress=192.168.1.5/24 PeerPublicKey='DEADBEEF123=' PeerAllowedIPs='192.168.1.0/24' PeerEndpoint='10.0.0.23:51820' $0"
+helper_line="MyAddress=192.168.1.5/24 MyDNS=192.168.1.1 PeerPublicKey='DEADBEEF123=' PeerAllowedIPs='192.168.1.0/24' PeerEndpoint='10.0.0.23:51820' $0"
 warn_env_var () {
   ENV_VAR_TO_SET=$1
   echo "Please set the environment variable '$ENV_VAR_TO_SET'"
@@ -11,6 +11,9 @@ warn_env_var () {
 env_var_checks () {
   if [ -z $MyAddress ]; then
     warn_env_var MyAddress
+  fi
+  if [ -z $MyDNS ]; then
+    warn_env_var MyDNS
   fi
   if [ -z $PeerPublicKey ]; then
     warn_env_var PeerPublicKey
@@ -52,6 +55,7 @@ cat >> $TMP/wg0.conf <<EOF
 [Interface]
 Address = $MyAddress
 PrivateKey = $MyPrivateKey
+DNS = $MyDNS
 
 [Peer]
 PublicKey = $PeerPublicKey
@@ -65,9 +69,6 @@ main () {
   prep_dirs
   make_keys
 
-  PeerPublicKey=$PeerPublicKey
-  PeerAllowedIPs=$PeerAllowedIPs
-  PeerEndpoint=$PeerEndpoint
   MyPrivateKey=$( cat $HOME/.wg/keys/$HOSTNAME.key )
 
   TMP=$(mktemp -d)
