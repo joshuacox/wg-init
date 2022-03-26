@@ -80,7 +80,7 @@ main () {
     echo "remove $WG_CONF_0 if you want to proceed"
     exit 1
   else
-    if [ -d /etc/wireguard/" ]; then
+    if [ -d "/etc/wireguard/" ]; then
       echo "Installing $WG_CONF_0 to /etc/wireguard/"
       sudo install -v -m400 $TMP/wg0.conf /etc/wireguard/
       echo "You can now use wg-quick"
