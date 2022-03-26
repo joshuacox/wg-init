@@ -87,6 +87,9 @@ main () {
       echo 'i.e.'
       echo 'sudo wg-quick up wg0'
       echo "After you add your pub to your peer. Your pub is $(cat $HOME/.wg/keys/$HOSTNAME.pub)"
+      echo " "
+      echo "$(cat $HOME/.wg/keys/$HOSTNAME.pub)"
+      echo " "
     else
       echo "Directory does not exist /etc/wireguard/"
       exit 1
