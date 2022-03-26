@@ -65,14 +65,13 @@ main () {
   prep_dirs
   make_keys
 
-  TMP=$(mktemp -d)
-  MyPrivateKey=$( cat $HOME/.wg/keys/$HOSTNAME.key )
   PeerPublicKey=$PeerPublicKey
   PeerAllowedIPs=$PeerAllowedIPs
   PeerEndpoint=$PeerEndpoint
+  MyPrivateKey=$( cat $HOME/.wg/keys/$HOSTNAME.key )
 
+  TMP=$(mktemp -d)
   mk_wg_conf
-  cat $TMP/wg0.conf
   WG_CONF_0=/etc/wireguard/wg0.conf
   sudo test -f $WG_CONF_0
   if [ "$?" == "0" ]; then
@@ -80,11 +79,16 @@ main () {
     echo "remove $WG_CONF_0 if you want to proceed"
     exit 1
   else
-    echo "Copying $WG_CONF_0 to /etc/wireguard/"
-    cp -vi $TMP/wg0.conf /etc/wireguard/
-    echo "You can now use wg-quick"
-    echo 'i.e.'
-    echo 'sudo wg-quick up wg0'
+    if [ -d /etc/wireguard/" ]; then
+      echo "Installing $WG_CONF_0 to /etc/wireguard/"
+      sudo install -v -m400 $TMP/wg0.conf /etc/wireguard/
+      echo "You can now use wg-quick"
+      echo 'i.e.'
+      echo 'sudo wg-quick up wg0'
+    else
+      echo "Directory does not exist /etc/wireguard/"
+      exit 1
+    fi
   fi
 }
 
