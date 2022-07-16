@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 helper_line="MyAddress=192.168.1.5/24 MyDNS=192.168.1.1 PeerPublicKey='DEADBEEF123=' PeerAllowedIPs='192.168.1.0/24' PeerEndpoint='10.0.0.23:51820' $0"
 warn_env_var () {
   ENV_VAR_TO_SET=$1
