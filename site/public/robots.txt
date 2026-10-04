@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://joshuacox.github.io/wg-init/sitemap.xml

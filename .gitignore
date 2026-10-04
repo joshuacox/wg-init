@@ -1,2 +1,13 @@
+# WireGuard local testing artifacts
 wg0.conf
 .cid
+
+# Next.js & Node artifacts
+site/node_modules/
+site/.next/
+site/out/
+site/.env*.local
+site/*.tsbuildinfo
+site/npm-debug.log*
+site/yarn-debug.log*
+site/yarn-error.log*
