@@ -22,20 +22,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
-          cache-dependency-path: site/package-lock.json
+          cache: "pnpm"
+          cache-dependency-path: site/pnpm-lock.yaml
 
       - name: Install dependencies
         working-directory: ./site
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build static site
         working-directory: ./site
-        run: npm run build
+        run: pnpm run build
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
